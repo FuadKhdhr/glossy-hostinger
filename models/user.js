@@ -1,50 +1,50 @@
 const mongoose = require('mongoose');
 
-const userSchema = mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
+const userSchema = mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    phone: {
+      type: String,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    address: {
+      type: String,
+      default: '',
+    },
+    isDoctor: {
+      type: Boolean,
+      default: false,
+    },
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
+    seenNotifications: {
+      type: Array,
+      default: [],
+    },
+    unseenNotifications: {
+      type: Array,
+      default: [],
+    },
+    dateCreated: {
+      type: Date,
+      default: Date.now,
+    },
   },
-  email: {
-    type: String,
-    required: true,
-  },
-  passwordHash: {
-    type: String,
-    required: true,
-  },
-  phone: {
-    type: String,
-    required: true,
-  },
-  isAdmin: {
-    type: Boolean,
-    default: false,
-  },
+  {
+    timestamps: true,
+  }
+);
 
-  street: {
-    type: String,
-    default: '',
-  },
-  apartment: {
-    type: String,
-    default: '',
-  },
-  zip: {
-    type: String,
-    default: '',
-  },
-  city: {
-    type: String,
-    default: '',
-  },
-  country: {
-    type: String,
-    default: '',
-  },
-});
-
-// Changing or create a new id instead _id
+/// Changing or create a new id instead _id
 userSchema.virtual('id').get(function () {
   return this._id.toHexString();
 });

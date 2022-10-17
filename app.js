@@ -6,47 +6,55 @@ const cors = require('cors');
 require('dotenv/config');
 const authJwt = require('./helpers/jwt');
 const errorHandler = require('./helpers/error-handler');
+
 app.use(cors());
 app.options('*', cors());
 
-//Middleware which is understandoble that send by front end
+//middleware
 app.use(express.json());
 app.use(morgan('tiny'));
 app.use(authJwt());
 app.use('/public/uploads', express.static(__dirname + '/public/uploads'));
 app.use(errorHandler);
 
-//Routers
-const categoriesRoutes = require('./routers/categories');
-const productsRoutes = require('./routers/products');
-const usersRoutes = require('./routers/users');
-const ordersRoutes = require('./routers/orders');
+///Routes
+const categoriesRoutes = require('./routes/categories');
+const doctorsRoutes = require('./routes/doctor');
+const usersRoutes = require('./routes/users');
+const adminRoutes = require('./routes/admin');
+const bannersRoutes = require('./routes/banners');
+const appointsRoutes = require('./routes/appointments');
 
-const api = process.env.API_URl;
+
+
+const api = process.env.API_URL;
 
 app.use(`${api}/categories`, categoriesRoutes);
-app.use(`${api}/products`, productsRoutes);
+app.use(`${api}/doctor`, doctorsRoutes);
 app.use(`${api}/users`, usersRoutes);
-app.use(`${api}/orders`, ordersRoutes);
+app.use(`${api}/admin`, adminRoutes);
+app.use(`${api}/banners`, bannersRoutes);
+app.use(`${api}/appointments`, appointsRoutes);
 
+
+//Database
 mongoose
-  .connect(process.env.MONGODB_URL, {
+  .connect(process.env.CONNECTION_STRING, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    dbName: 'eshop-dtabase',
+    dbName: 'doctor-appointment',
   })
   .then(() => {
-    console.log('Database connection is ready...');
+    console.log('Database Connection is ready...');
   })
   .catch((err) => {
     console.log(err);
   });
 
-//Development
+//Server
 // app.listen(3000, () => {
 //   console.log('server is running http://localhost:3000');
 // });
-
 //Production
 var server = app.listen(process.env.Port || 3000, function () {
   var port = server.address().port;
