@@ -1,7 +1,7 @@
 {
-  "name": "eshop",
+  "name": "doctorappointment",
   "version": "1.0.0",
-  "description": "backend of the eshop",
+  "description": "backend of the doctor appointment",
   "main": "app.js",
   "scripts": {
     "start": "nodemon app.js",

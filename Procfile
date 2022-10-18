@@ -1,1 +1,1 @@
-worker:nodemon app.js
+web: node --experimental-modules app.js
