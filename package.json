@@ -2,13 +2,13 @@
   "name": "doctorappointment",
   "version": "1.0.0",
   "description": "backend of the doctor appointment",
-  "main": "server.js",
+  "main": "app.js",
   "engines": {
     "node": "16.x",
     "npm": "8.x"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "node app.js",
     "test": "echo \"Error:no test specified\" && exit 1"
   },
   "author": "",
