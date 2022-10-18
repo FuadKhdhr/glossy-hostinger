@@ -35,10 +35,13 @@ const api = process.env.API_URL;
 
 app.use(`${api}/categories`, categoriesRoutes);
 app.use(`${api}/doctor`, doctorsRoutes);
-app.use(`${api}/users`, usersRoutes);
+app.get(`${api}/users`, usersRoutes);
 app.use(`${api}/admin`, adminRoutes);
 app.use(`${api}/banners`, bannersRoutes);
 app.use(`${api}/appointments`, appointsRoutes);
+app.get('/', function (res, req) {
+  res.status(200).json({ message: 'hello' });
+});
 
 //Database
 mongoose
