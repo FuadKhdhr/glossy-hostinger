@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 
 // const authMiddleware = require('../helpers/authMiddleware');
 const { Appointment } = require('../models/appointment');
-const CancelAppointment = require('../models/CancelAppointment');
+const CancelAppointment = require('../models/cancelAppointment');
 const moment = require('moment');
 
 router.post('/get-appointments-by-user-id', async (req, res) => {
