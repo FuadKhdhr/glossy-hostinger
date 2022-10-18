@@ -14,10 +14,13 @@ app.options('*', cors());
 app.use(express.json());
 app.use(morgan('tiny'));
 app.use(authJwt());
-app.use('/public/uploads', express.static(__dirname + '/public/uploads'));
-app.get('*', (req, res) =>
-  res.sendFile(path.join(__dirname, '/frontend/build/index.html'))
+app.use(
+  '/public/uploads',
+  express.static(path.join(__dirname + '/public/uploads'))
 );
+// app.get('*', (req, res) =>
+//   res.sendFile(path.join(__dirname, 'build/index.html'))
+// );
 app.use(errorHandler);
 
 ///Routes
@@ -28,8 +31,6 @@ const adminRoutes = require('./routes/admin');
 const bannersRoutes = require('./routes/banners');
 const appointsRoutes = require('./routes/appointments');
 
-
-
 const api = process.env.API_URL;
 
 app.use(`${api}/categories`, categoriesRoutes);
@@ -38,7 +39,6 @@ app.use(`${api}/users`, usersRoutes);
 app.use(`${api}/admin`, adminRoutes);
 app.use(`${api}/banners`, bannersRoutes);
 app.use(`${api}/appointments`, appointsRoutes);
-
 
 //Database
 mongoose
