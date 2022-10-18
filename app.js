@@ -12,7 +12,7 @@ app.options('*', cors());
 //middleware
 app.use(express.json());
 app.use(morgan('tiny'));
-// app.use(authJwt());
+app.use(authJwt());
 app.use('/public/uploads', express.static(__dirname + '/public/uploads'));
 
 app.use(errorHandler);
@@ -53,7 +53,7 @@ mongoose
 //   console.log('server is running http://localhost:3000');
 // });
 //Production
-var server = app.listen(process.env.Port || 3000, function () {
+var server = app.listen(process.env.PORT || 3000, function () {
   var port = server.address().port;
   console.log('Express is working on port ' + port);
 });
