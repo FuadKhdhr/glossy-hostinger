@@ -6,6 +6,7 @@ const cors = require('cors');
 require('dotenv/config');
 const authJwt = require('./helpers/jwt');
 const errorHandler = require('./helpers/error-handler');
+const path = require('path');
 
 app.use(cors());
 app.options('*', cors());
@@ -13,14 +14,12 @@ app.options('*', cors());
 //middleware
 app.use(express.json());
 app.use(morgan('tiny'));
-app.use(authJwt());
+// app.use(authJwt());
 app.use(
   '/public/uploads',
   express.static(path.join(__dirname + '/public/uploads'))
 );
-// app.get('*', (req, res) =>
-//   res.sendFile(path.join(__dirname, 'build/index.html'))
-// );
+
 app.use(errorHandler);
 
 ///Routes
@@ -35,13 +34,10 @@ const api = process.env.API_URL;
 
 app.use(`${api}/categories`, categoriesRoutes);
 app.use(`${api}/doctor`, doctorsRoutes);
-app.get(`${api}/users`, usersRoutes);
+app.use(`${api}/users`, usersRoutes);
 app.use(`${api}/admin`, adminRoutes);
 app.use(`${api}/banners`, bannersRoutes);
 app.use(`${api}/appointments`, appointsRoutes);
-app.get('/', function (res, req) {
-  res.status(200).json({ message: 'hello' });
-});
 
 //Database
 mongoose
