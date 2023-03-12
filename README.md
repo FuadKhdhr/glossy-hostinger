@@ -1,0 +1,2 @@
+# glossy-hostinger
+hostinger server
